@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SocioLedger Demo ERP</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <section id="login-view" class="panel login-panel">
+      <h1>SocioLedger Demo ERP</h1>
+      <p class="muted">QA automation training application</p>
+      <label>Username<input data-testid="username" id="username" value="admin"></label>
+      <label>Password<input data-testid="password" id="password" type="password" value="admin123"></label>
+      <button data-testid="login-button" id="login-button">Sign in</button>
+      <p data-testid="login-error" id="login-error" class="error" aria-live="polite"></p>
+      <small>Demo credentials: admin / admin123</small>
+    </section>
+
+    <section id="erp-view" hidden>
+      <header class="topbar">
+        <div><strong>SocioLedger</strong><span class="muted"> / Demo ERP</span></div>
+        <button data-testid="logout-button" id="logout-button" class="secondary">Log out</button>
+      </header>
+      <nav class="nav">
+        <button data-testid="nav-dashboard" data-view="dashboard">Dashboard</button>
+        <button data-testid="nav-customers" data-view="customers">Customers</button>
+        <button data-testid="nav-products" data-view="products">Products</button>
+        <button data-testid="nav-invoices" data-view="invoices">Invoices</button>
+      </nav>
+
+      <section id="dashboard-view" class="view panel">
+        <h1 data-testid="dashboard-heading">ERP Dashboard</h1>
+        <p>Manage customers, products, inventory and invoices.</p>
+        <div class="stats">
+          <div class="stat"><span>Customers</span><strong id="customer-count">0</strong></div>
+          <div class="stat"><span>Products</span><strong id="product-count">0</strong></div>
+          <div class="stat"><span>Invoices</span><strong id="invoice-count">0</strong></div>
+        </div>
+      </section>
+
+      <section id="customers-view" class="view panel" hidden>
+        <h2>Customer Management</h2>
+        <div class="form-grid">
+          <label>Customer name<input data-testid="customer-name" id="customer-name"></label>
+          <label>Email<input data-testid="customer-email" id="customer-email" type="email"></label>
+          <label>Phone<input data-testid="customer-phone" id="customer-phone"></label>
+        </div>
+        <button data-testid="save-customer" id="save-customer">Save customer</button>
+        <p data-testid="customer-success" id="customer-success" class="success" aria-live="polite"></p>
+        <p data-testid="customer-error" id="customer-error" class="error" aria-live="polite"></p>
+        <label>Search customers<input data-testid="customer-search" id="customer-search" placeholder="Search by name"></label>
+        <div id="customer-list" class="list"></div>
+      </section>
+
+      <section id="products-view" class="view panel" hidden>
+        <h2>Product & Inventory</h2>
+        <div class="form-grid">
+          <label>Product name<input data-testid="product-name" id="product-name"></label>
+          <label>SKU<input data-testid="product-sku" id="product-sku"></label>
+          <label>Unit price (INR)<input data-testid="product-price" id="product-price" type="number"></label>
+          <label>Stock quantity<input data-testid="product-stock" id="product-stock" type="number"></label>
+        </div>
+        <button data-testid="save-product" id="save-product">Save product</button>
+        <p data-testid="product-success" id="product-success" class="success" aria-live="polite"></p>
+        <p data-testid="product-error" id="product-error" class="error" aria-live="polite"></p>
+        <div id="product-list" class="list"></div>
+      </section>
+
+      <section id="invoices-view" class="view panel" hidden>
+        <h2>Invoice & Billing</h2>
+        <div class="form-grid">
+          <label>Customer<select data-testid="invoice-customer" id="invoice-customer"><option value="">Select customer</option></select></label>
+          <label>Product<select data-testid="invoice-product" id="invoice-product"><option value="">Select product</option></select></label>
+          <label>Quantity<input data-testid="invoice-quantity" id="invoice-quantity" type="number" value="1"></label>
+          <label>GST rate
+            <select data-testid="invoice-gst" id="invoice-gst">
+              <option value="0">0%</option><option value="5">5%</option>
+              <option value="12">12%</option><option value="18" selected>18%</option><option value="28">28%</option>
+            </select>
+          </label>
+        </div>
+        <button data-testid="calculate-invoice" id="calculate-invoice">Calculate invoice</button>
+        <div class="totals">
+          <p>Subtotal: ₹<strong data-testid="invoice-subtotal" id="invoice-subtotal">0.00</strong></p>
+          <p>GST: ₹<strong data-testid="invoice-gst-amount" id="invoice-gst-amount">0.00</strong></p>
+          <p class="grand-total">Total: ₹<strong data-testid="invoice-total" id="invoice-total">0.00</strong></p>
+        </div>
+        <button data-testid="save-invoice" id="save-invoice">Save invoice</button>
+        <p data-testid="invoice-success" id="invoice-success" class="success" aria-live="polite"></p>
+        <p data-testid="invoice-error" id="invoice-error" class="error" aria-live="polite"></p>
+        <div id="invoice-list" class="list"></div>
+      </section>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
